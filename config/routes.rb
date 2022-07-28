@@ -2,16 +2,18 @@
 
 Rails.application.routes.draw do
 
+
   unauthenticated do
     root 'home#index'
   end
   authenticated do
-    root 'home#index'
+    root 'posts#index'
   end
 
   devise_for :users do
-    :posts
+    # :posts
   end
+  resources :posts
 
 
   get 'home/index'
