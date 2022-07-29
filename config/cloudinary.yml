@@ -1,0 +1,12 @@
+development:
+  cloud_name: dllkbvnu7
+  api_key: 269392459365443
+  api_secret: O5A7PN8dVBf-D2n400Pbfm8g55o
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dllkbvnu7
+  api_key: 269392459365443
+  api_secret: O5A7PN8dVBf-D2n400Pbfm8g55o
+  enhance_image_tag: true
+  static_file_support: false
