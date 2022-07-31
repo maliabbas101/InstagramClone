@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'comments/index'
+  get 'comments/show'
   unauthenticated do
     root 'home#index'
   end
