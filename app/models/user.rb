@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   validates :full_name, :username, :user_type, presence: true
   validates :username, uniqueness: true
+  has_one_attached :avatar
 end

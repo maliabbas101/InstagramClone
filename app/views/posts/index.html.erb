@@ -1,3 +1,9 @@
+<% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar, :width=>150, :crop=>"fill" %>
+<%else%>
+    <%= image_tag "person_icon.png",:width=>150, :crop=>"fill" %>
+<% end %>
+
 <%=current_user.user_type%>
 <h1>Posts</h1>
 <table>
