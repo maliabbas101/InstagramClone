@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Object was successfully updated'
+      redirect_to @post, notice: 'Post was successfully updated'
     else
       render 'edit', notice: 'Something went wrong'
     end
