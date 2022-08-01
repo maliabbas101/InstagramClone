@@ -11,13 +11,13 @@ class User < ApplicationRecord
   validates :username, :email, uniqueness: true
   has_one_attached :avatar
   validates_confirmation_of :password
-  validates :full_name ,:format => { :with => /\A[a-zA-Z]+\z/,
+  validates :full_name ,:format => { :with => /\A[a-z0-9\s]+\Z/i,
   :message => "can not contain special characters or numerics." }
   validate :correct_image_type
 
   private
   def correct_image_type
-    if self.avatar.attached? && !self.avatar.content_type.in?(%w(avatar/jpeg avatar/png avatar/gif))
+    if self.avatar.attached? && !self.avatar.content_type.in?(%w(image/jpeg image/png image/gif))
       self.errors[:base] << "Image type is not correct."
     end
   end
