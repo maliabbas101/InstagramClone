@@ -1,3 +1,9 @@
+<% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar, :width=>150, :crop=>"fill" %>
+<%else%>
+    <%= image_tag "person_icon.png",:width=>150, :crop=>"fill" %>
+<% end %>
+
 <%=current_user.user_type%>
 <h1>Posts</h1>
 <table>
@@ -13,6 +19,13 @@
       <tr>
       <%if post.user == current_user%>
         <td><%= post.caption %></td>
+        <td>
+              <% if post.images.attached?%>
+              <% post.images.each do |image|%>
+              <%= image_tag image , width:"50"%>
+              <%end%>
+              <%end%>
+        </td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

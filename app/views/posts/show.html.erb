@@ -3,5 +3,13 @@
   <%= @post.caption %>
 </p>
 
+<p>
+  <% if @post.images.attached?%>
+  <% @post.images.each do |image|%>
+  <%= image_tag image , width:"200"%>
+  <%end%>
+  <%end%>
+</p>
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
