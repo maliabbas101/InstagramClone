@@ -1,0 +1,17 @@
+<%= form_with model: [ @post, @post.comments.build ] do |form| %>
+  <p>
+    <%= form.text_area :body %>
+  </p>
+  <p class="actions">
+    <%= form.submit %>
+  </p>
+
+  <div class="field form-group">
+    <%= form.text_field :user_id,id: :comment_user_id,class:"form-control",value: @post.user_id, type: :hidden %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.text_field :post_id,id: :comment_post_id,class:"form-control",value: @post.id, type: :hidden %>
+  </div>
+
+<% end %>

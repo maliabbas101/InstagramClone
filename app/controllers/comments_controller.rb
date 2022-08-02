@@ -12,28 +12,34 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit; end
+  def edit
+    @post = Post.find(params[:post_id])
+  end
 
   def create
-    @comment = Comment.new(comment_params)
+    @post = Post.find(params[:comment][:post_id])
+    @comment = @post.comments.create(comment_params)
     if @comment.save
-      redirect_to @comment, notice: 'Comment was successfully added.'
+      redirect_to @post, notice: 'Comment was successfully added.'
     else
-      render 'new', 'Something went wrong'
+      render 'posts/show', notice: 'Something went wrong'
     end
   end
 
   def update
+    byebug
+    @post = Post.find(params[:post_id])
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      redirect_to @post, notice: 'Comment was successfully updated.'
     else
       render 'edit', notice: 'Something went wrong'
     end
   end
 
   def destroy
+    @post = Post.find(params[:post_id])
     if @comment.destroy
-      redirect_to comments_url, notice: 'Comment was successfully deleted.'
+      redirect_to @post, notice: 'Comment was successfully deleted.'
     else
       redirect_to comments_url, notice: 'Something went wrong'
     end
@@ -46,6 +52,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :post_id)
+    params.require(:comment).permit(:body, :user_id, :post_id, [:comment])
   end
 end
