@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.destroy
-      redirect_to posts_url, notice: 'Object was successfully deleted.'
+      redirect_to posts_url, notice: 'Post was successfully deleted.'
     else
       redirect_to posts_url, notice: 'Something went wrong'
     end

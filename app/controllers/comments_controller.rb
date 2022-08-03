@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
 
   def edit
     @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
   end
 
   def create
@@ -22,12 +23,13 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
-      render 'posts/show', notice: 'Something went wrong'
+      byebug
+      flash[:notice]='Comment can not be blank.'
+      render 'posts/show'
     end
   end
 
   def update
-    byebug
     @post = Post.find(params[:post_id])
     if @comment.update(comment_params)
       redirect_to @post, notice: 'Comment was successfully updated.'

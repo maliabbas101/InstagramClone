@@ -14,4 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree
+//= require jquery
+//= require rails.validations
 import '@client-side-validations/client-side-validations';

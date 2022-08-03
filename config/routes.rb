@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/users/feed' ,to: 'users#feed' , as:'pathfeed'
   unauthenticated do
     root 'home#index'
   end
