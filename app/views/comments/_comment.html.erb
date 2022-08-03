@@ -1,4 +1,4 @@
-
+<% unless !comment.persisted? %>
   <%= image_tag User.find(comment.user_id).avatar , width:"20", height:"20", class:"rounded-circle"%>
   <strong><%= User.find(comment.user_id).username%></strong>
     <%= comment.body%>
@@ -6,7 +6,7 @@
     <%= link_to image_tag('trash.svg', width:"20", height:"20"), post_comment_path(@post.id,comment.id), method: :delete, data: { confirm: 'Are you sure?' },class:"ml-3"%>
     <br>
    <br>
-
+<% end %>
 
 
 
