@@ -6,8 +6,9 @@
     <%= form.submit class:"btn btn-secondary" %>
   </p>
 
+
   <div class="field form-group">
-    <%= form.text_field :user_id,id: :comment_user_id,class:"form-control",value: @post.user_id, type: :hidden %>
+    <%= form.text_field :user_id,id: :comment_user_id,class:"form-control",value: current_user.id, type: :hidden %>
   </div>
 
   <div class="field form-group">

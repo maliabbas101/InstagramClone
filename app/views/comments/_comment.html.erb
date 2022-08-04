@@ -1,9 +1,15 @@
 <% unless !comment.persisted? %>
-  <%= image_tag User.find(comment.user_id).avatar , width:"20", height:"20", class:"rounded-circle"%>
+  <% if User.find(comment.user_id).avatar.attached?%>
+    <%= image_tag User.find(comment.user_id).avatar , width:"20", height:"20", class:"rounded-circle"%>
+  <% else %>
+    <%= image_tag 'person_icon.png' , width:"20", height:"20", class:"rounded-circle"%>
+  <%end%>
   <strong><%= User.find(comment.user_id).username%></strong>
     <%= comment.body%>
-    <%= link_to image_tag('edit.svg', width:"20", height:"20"), edit_post_comment_path(@post.id,comment.id),class:"ml-3"%>
-    <%= link_to image_tag('trash.svg', width:"20", height:"20"), post_comment_path(@post.id,comment.id), method: :delete, data: { confirm: 'Are you sure?' },class:"ml-3"%>
+    <%if current_user== comment.post.user%>
+      <%= link_to image_tag('edit.svg', width:"20", height:"20"), edit_post_comment_path(@post.id,comment.id),class:"ml-3"%>
+       <%= link_to image_tag('trash.svg', width:"20", height:"20"), post_comment_path(@post.id,comment.id), method: :delete, data: { confirm: 'Are you sure?' },class:"ml-3"%>
+    <%end%>
     <br>
    <br>
 <% end %>
