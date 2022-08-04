@@ -23,8 +23,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
-      byebug
-      flash[:notice]='Comment can not be blank.'
+      flash[:notice] = 'Comment can not be blank.'
       render 'posts/show'
     end
   end

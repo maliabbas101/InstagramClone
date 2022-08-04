@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  default_scope {order(created_at: :desc)}
+  default_scope { order(created_at: :desc) }
   belongs_to :user
   has_many_attached :images
   has_many :comments, dependent: :destroy
@@ -11,13 +11,14 @@ class Post < ApplicationRecord
   validate :correct_image_type
 
   private
+
   def correct_image_type
-    if self.images.attached?
+    if images.attached?
       images.each do |image|
-        if !image.content_type.in?(%w(image/jpeg image/png image/gif))
-          self.errors[:base] << "One or more image type is not correct."
+        unless image.content_type.in?(%w[image/jpeg image/png image/gif])
+          errors[:base] << 'One or more image type is not correct.'
         end
-     end
+      end
     end
   end
 end
