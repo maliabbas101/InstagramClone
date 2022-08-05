@@ -1,10 +1,10 @@
 <% unless !comment.persisted? %>
-  <% if User.find(comment.user_id).avatar.attached?%>
-    <%= image_tag User.find(comment.user_id).avatar , width:"20", height:"20", class:"rounded-circle"%>
+  <% if   useravatar(comment.user_id).attached?%>
+    <%= image_tag useravatar(comment.user_id) , width:"20", height:"20", class:"rounded-circle"%>
   <% else %>
     <%= image_tag 'person_icon.png' , width:"20", height:"20", class:"rounded-circle"%>
   <%end%>
-  <strong><%= User.find(comment.user_id).username%></strong>
+  <strong><%= username(comment.user_id)%></strong>
     <%= comment.body%>
     <%if current_user== comment.post.user%>
       <%= link_to image_tag('edit.svg', width:"20", height:"20"), edit_post_comment_path(@post.id,comment.id),class:"ml-3"%>
