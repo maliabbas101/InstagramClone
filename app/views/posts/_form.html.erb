@@ -11,14 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :caption %>
-    <%= form.text_field :caption %>
+  <div class="field form-group">
+    <%= form.text_field :caption, placeholder:"Caption", class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :Select_Image_or_Images %>
-    <%= form.file_field :images, multiple: true %>
+  <div class="field form-group">
+    <%= form.file_field :images, multiple: true, placeholder:"Select Image or Images", class:"form-control" %>
   </div>
 
   <div class="field form-group">
@@ -26,6 +24,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-secondary" %>
   </div>
 <% end %>

@@ -46,9 +46,6 @@ Rails.application.configure do
   # config.require_master_key = true
   # config.autoloader = :classic
 
-
-
-
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'

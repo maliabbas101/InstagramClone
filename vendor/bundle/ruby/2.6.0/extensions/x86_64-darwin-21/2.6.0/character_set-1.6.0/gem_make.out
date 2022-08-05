@@ -1,0 +1,66 @@
+current directory: /Users/dev/RailsPractice/Instagram/vendor/bundle/ruby/2.6.0/gems/character_set-1.6.0/ext/character_set
+/Users/dev/.rvm/rubies/ruby-2.6.0/bin/ruby -I /Users/dev/.rvm/rubies/ruby-2.6.0/lib/ruby/site_ruby/2.6.0 -r ./siteconf20220803-3064-rxbrdy.rb extconf.rb
+creating Makefile
+
+current directory: /Users/dev/RailsPractice/Instagram/vendor/bundle/ruby/2.6.0/gems/character_set-1.6.0/ext/character_set
+make "DESTDIR=" clean
+
+current directory: /Users/dev/RailsPractice/Instagram/vendor/bundle/ruby/2.6.0/gems/character_set-1.6.0/ext/character_set
+make "DESTDIR="
+compiling character_set.c
+In file included from character_set.c:1:
+In file included from /Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby.h:33:
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2492:20: warning: 'diagnose_if' is a clang extension [-Wgcc-compat]
+    __attribute__((diagnose_if(rb_scan_args_count(fmt,varc)==0,"bad scan arg format","error")))
+                   ^
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2493:20: warning: 'diagnose_if' is a clang extension [-Wgcc-compat]
+    __attribute__((diagnose_if(rb_scan_args_count(fmt,varc)!=varc,"variable argument length doesn't match","error")))
+                   ^
+character_set.c:734:28: warning: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+  return rb_funcall(array, rb_intern("sample"), argc, argc ? argv[0] : 0);
+                           ^~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1826:23: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                      ^
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2602:20: note: expanded from macro 'rb_funcall'
+        rb_funcallv(recv, mid, \
+                          ^~~
+character_set.c:734:28: note: '{' token is here
+  return rb_funcall(array, rb_intern("sample"), argc, argc ? argv[0] : 0);
+                           ^~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1826:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1811:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    {                                                   \
+    ^
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2602:20: note: expanded from macro 'rb_funcall'
+        rb_funcallv(recv, mid, \
+                          ^~~
+character_set.c:734:28: warning: '}' and ')' tokens terminating statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+  return rb_funcall(array, rb_intern("sample"), argc, argc ? argv[0] : 0);
+                           ^~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1826:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1816:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    }
+    ^
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2602:20: note: expanded from macro 'rb_funcall'
+        rb_funcallv(recv, mid, \
+                          ^~~
+character_set.c:734:28: note: ')' token is here
+  return rb_funcall(array, rb_intern("sample"), argc, argc ? argv[0] : 0);
+                           ^~~~~~~~~~~~~~~~~~~
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:1826:56: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                                                       ^
+/Users/dev/.rvm/rubies/ruby-2.6.0/include/ruby-2.6.0/ruby/ruby.h:2602:20: note: expanded from macro 'rb_funcall'
+        rb_funcallv(recv, mid, \
+                          ^~~
+4 warnings generated.
+linking shared-object character_set/character_set.bundle
+
+current directory: /Users/dev/RailsPractice/Instagram/vendor/bundle/ruby/2.6.0/gems/character_set-1.6.0/ext/character_set
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 character_set.bundle ./.gem.20220803-3064-1snmjzx/character_set

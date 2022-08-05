@@ -35,9 +35,6 @@ Rails.application.configure do
   # config.require_master_key = true
   # config.autoloader = :classic
 
-
-
-
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
