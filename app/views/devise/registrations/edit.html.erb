@@ -36,12 +36,12 @@
       <div class="field form-group">
         <%if current_user.avatar.attached?%>
           <%= f.label :Choose_new_Display_Picture %><br />
-          <%= f.file_field :avatar, class:"form-control" %>
+          <%= f.file_field :avatar, class:"form-control",accept:'image/*' %>
           <br>
           <%= image_tag current_user.avatar, :width=>150, :crop=>"fill"%>
         <%else%>
           <%= f.label :Choose_Display_Picture %><br />
-          <%= f.file_field :avatar, class:"form-control" %>
+          <%= f.file_field :avatar, class:"form-control",accept:'image/*' %>
         <%end%>
       </div>
       <div class="actions">

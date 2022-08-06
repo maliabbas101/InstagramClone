@@ -33,7 +33,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"Confirm your Password",class:"form-control" %>
   </div>
   <div class="field form-group">
-    <%= f.file_field :avatar,placeholder:"Display Picture",class:"form-control" %>
+    <%= f.file_field :avatar,placeholder:"Display Picture",class:"form-control",accept:'image/*' %>
   </div>
   <div class="actions">
     <%= f.submit "Sign up",class:"btn btn-dark" %>
