@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   validates :full_name, :username, :user_type, presence: true
   validates :username, :email, uniqueness: true
   has_one_attached :avatar

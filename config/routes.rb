@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :likes, only: %i[create destroy]
+
   get 'home/index'
   get '/users', to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -8,4 +8,8 @@ module UsersHelper
   def useravatar(id)
     User.find(id).avatar
   end
+
+  def checkLike(post)
+    current_user.likes.find_by(post: post)
+  end
 end
