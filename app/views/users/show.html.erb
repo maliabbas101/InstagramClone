@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="card-text">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, :width=>150, :crop=>"fill",:class=> "rounded-circle" %>
+        <%else%>
+          <%= image_tag "person_icon.png",:width=>150, :crop=>"fill",:class=> "rounded-circle" %>
+        <% end %>
+        <br>
+        <h5 class="ml-1.5"><%= @user.full_name%></h5>
+        <h5 class="ml-1.5"><%= @user.user_type%>  Account </h5>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <div class="card-body blockquote">
+        <strong>
+          <h2><%=@user.username%></h2>
+        </strong><br>
+        <%= button_to "Follow"%>
+        <%= @user.posts.count%> Posts &nbsp;&nbsp;
+        Followers &nbsp;&nbsp;
+        Following &nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<table>
+  <tbody>
+    <td >
+      <% @posts.each do |post| %>
+        <tr class="p-1">
+          <% if post.images.attached? && post.images.count>1%>
+            <%# TO DO %>
+          <%end%>
+          <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+        </tr>
+      <%end%>
+    </td>
+  </tbody>
+</table>

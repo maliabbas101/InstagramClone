@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   get '/users/feed', to: 'users#feed', as: 'pathfeed'
+  get 'search', to: 'users#index'
   unauthenticated do
     root 'home#index'
   end
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :likes, only: %i[create destroy]
+  resources :users ,only: %i[show]
 
   get 'home/index'
   get '/users', to: 'home#index'
