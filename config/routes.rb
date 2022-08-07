@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :likes, only: %i[create destroy]
-  resources :users ,only: %i[show]
+  resources :users, only: %i[show]
 
   get 'home/index'
   get '/users', to: 'home#index'

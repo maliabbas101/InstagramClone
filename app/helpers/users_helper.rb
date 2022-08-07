@@ -9,7 +9,11 @@ module UsersHelper
     User.find(id).avatar
   end
 
-  def checkLike(post)
+  def check_like(post)
     current_user.likes.find_by(post: post)
+  end
+
+  def populate_users
+    User.where('full_name ILIKE ?', "%#{params[:q]}%")
   end
 end

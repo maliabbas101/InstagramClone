@@ -9,19 +9,17 @@ class LikesController < ApplicationController
     respond_to do |format|
       if @like.save
         format.html { redirect_to pathfeed_path }
-        format.js
       else
         format.html { flash[:notice] = @like.errors.full_messages }
-        format.js
       end
+      format.js
     end
   end
 
   def destroy
-    post = @like.post
     @like.destroy
     respond_to do |format|
-      format.html {redirect_to pathfeed_path}
+      format.html { redirect_to pathfeed_path }
       format.js
     end
   end

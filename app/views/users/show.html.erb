@@ -17,13 +17,17 @@
         <strong>
           <h2><%=@user.username%></h2>
         </strong><br>
-        <%= button_to "Follow"%>
-        <%= @user.posts.count%> Posts &nbsp;&nbsp;
-        Followers &nbsp;&nbsp;
-        Following &nbsp;&nbsp;
-      </div>
+        <%if @user!=current_user%>
+          <%= link_to "Follow",root_path,class:"btn btn-dark" %>
+        <br>
+        <br>
+      <%end%>
+      <%= @user.posts.count%> Posts &nbsp;&nbsp;
+      0 Followers &nbsp;&nbsp;
+      0 Following &nbsp;&nbsp;
     </div>
   </div>
+</div>
 </div>
 <hr>
 <table>
