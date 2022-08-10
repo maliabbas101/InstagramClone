@@ -21,8 +21,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
-      flash[:notice] = 'Comment can not be blank.'
-      render 'posts/show'
+      redirect_to post_url(@post), notice: "Comment #{@comment.errors.full_messages.to_sentence}"
     end
   end
 
@@ -30,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to @post, notice: 'Comment was successfully updated.'
     else
-      render 'edit', notice: 'Something went wrong'
+      redirect_to edit_post_comment_url, notice: "Comment #{@comment.errors.full_messages.to_sentence}"
     end
   end
 

@@ -16,4 +16,14 @@ module UsersHelper
   def populate_users
     User.where('full_name ILIKE ?', "%#{params[:q]}%")
   end
+
+  def back_rout(user)
+    return pathfeed_path if current_user != user
+
+    posts_path
+  end
+
+  def user_details(id)
+    User.find(id)
+  end
 end
