@@ -28,30 +28,27 @@ module UsersHelper
   end
 
   def avatar_selection(user)
-    if user.avatar.attached?
-      return user.avatar
-    end
-    return 'person_icon.png'
+    return user.avatar if user.avatar.attached?
+
+    'person_icon.png'
   end
 
   def show_suggestions?
-    if current_user.following.count == (User.count)-1
-      return false
-    end
-    return true
+    return false if current_user.following.count == User.count - 1
+
+    true
   end
 
-  def requested?(requests,user)
+  def requested?(requests, user)
     requests.each do |request|
       return true if request.reciever_id == user.id
     end
-    return false
+    false
   end
 
   def follow_rout(user)
-    if user.user_type == "Private"
-      return requests_path(reciever_id: user.id)
-    end
-    return friendships_path(user_id: user.id)
+    return requests_path(reciever_id: user.id) if user.user_type == 'Private'
+
+    friendships_path(user_id: user.id)
   end
 end

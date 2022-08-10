@@ -1,5 +1,6 @@
-class FriendshipsController < ApplicationController
+# frozen_string_literal: true
 
+class FriendshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
   def create
@@ -17,6 +18,4 @@ class FriendshipsController < ApplicationController
   def set_user
     @user = User.find(params[:user_id])
   end
-
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Request < ApplicationRecord
   belongs_to :requester, class_name: :User
   belongs_to :reciever, class_name: :User

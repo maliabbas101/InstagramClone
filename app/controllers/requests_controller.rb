@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class RequestsController < ApplicationController
-  before_action :authenticate_user!,only: %i[create destroy]
-  before_action :set_user,only: %i[create]
+  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :set_user, only: %i[create]
   def index
     @requests = Request.all.where("reciever_id=#{current_user.id}")
   end
@@ -9,7 +11,6 @@ class RequestsController < ApplicationController
     current_user.send_request(@user)
     redirect_to user_path(@user.id)
   end
-
 
   def destroy
     @request = Request.find(params[:id])

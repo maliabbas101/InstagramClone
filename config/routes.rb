@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[show]
-  resources :friendships , only: %i[create destroy]
-  resources :requests , only: %i[index create destroy edit]
+  resources :friendships, only: %i[create destroy]
+  resources :requests, only: %i[index create destroy edit]
 
   get 'home/index'
   get '/users', to: 'home#index'
