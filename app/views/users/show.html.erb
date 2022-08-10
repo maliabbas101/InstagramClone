@@ -17,11 +17,13 @@
         <strong>
           <h2><%=@user.username%></h2>
         </strong><br>
-        <%if @user!=current_user%>
+        <%if current_user.following?(@user)%>
+          <%= link_to "Unfollow",root_path,class:"btn btn-dark" %>
+        <%else%>
           <%= link_to "Follow",root_path,class:"btn btn-dark" %>
+        <%end%>
         <br>
         <br>
-      <%end%>
       <%= @user.posts.count%> Posts &nbsp;&nbsp;
       0 Followers &nbsp;&nbsp;
       0 Following &nbsp;&nbsp;
