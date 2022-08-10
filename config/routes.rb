@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :stories, only: %i[create index new destroy show]
+
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[show]
   resources :friendships, only: %i[create destroy]

@@ -1,0 +1,12 @@
+<div class="container d-flex flex-row bd-highlight mb-3">
+  <% if current_user.stories.count == 0%>
+    <%= image_tag avatar_selection(current_user),width:"90", height:"90",class:"rounded-circle"%>
+    <%= link_to image_tag('plus.svg', width:"20", height:"20",class:"mr-2") , new_story_path, class: 'nav-link' %>
+  <%end%>
+  <%users.each do |user|%>
+    <%user.stories.each do |story|%>
+      <div class="p-2 bd-highlight"><%= link_to  image_tag(avatar_selection(user),width:"90", height:"90",class:"rounded-circle border border-danger") , story_path(story), class: 'nav-link' %>
+      </div>
+    <%end%>
+  <%end%>
+</div>
