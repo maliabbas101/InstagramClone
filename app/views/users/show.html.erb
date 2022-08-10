@@ -17,19 +17,21 @@
         <strong>
           <h2><%=@user.username%></h2>
         </strong><br>
-        <%if current_user.following?(@user)%>
-          <%= link_to "Unfollow",root_path,class:"btn btn-dark" %>
-        <%else%>
-          <%= link_to "Follow",root_path,class:"btn btn-dark" %>
+        <%if @user!=current_user%>
+          <%if current_user.following?(@user)%>
+            <%= link_to "Unfollow",friendship_path(user_id: @user.id),method: :delete,class:"btn btn-dark" %>
+          <%else%>
+            <%= link_to "Follow",friendships_path(user_id: @user.id),method: :post,class:"btn btn-secondary" %>
+          <%end%>
+          <br>
+          <br>
         <%end%>
-        <br>
-        <br>
-      <%= @user.posts.count%> Posts &nbsp;&nbsp;
-      0 Followers &nbsp;&nbsp;
-      0 Following &nbsp;&nbsp;
+        <%= @user.posts.count%> Posts &nbsp;&nbsp;
+        0 Followers &nbsp;&nbsp;
+        0 Following &nbsp;&nbsp;
+      </div>
     </div>
   </div>
-</div>
 </div>
 <hr>
 <table>

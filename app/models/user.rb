@@ -23,11 +23,11 @@ class User < ApplicationRecord
   validate :correct_image_type
 
   def follow(user)
-    active.friendships.create(followed_id: user.id)
+    active_friendships.create(followed_id: user.id)
   end
 
   def unfollow(user)
-    active.friendships.find_by(followed_id: user.id).destroy
+    active_friendships.find_by(followed_id: user.id).destroy
   end
 
   def following?(user)

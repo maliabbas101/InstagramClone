@@ -26,4 +26,18 @@ module UsersHelper
   def user_details(id)
     User.find(id)
   end
+
+  def avatar_selection(user)
+    if user.avatar.attached?
+      return user.avatar
+    end
+    return 'person_icon.png'
+  end
+
+  def show_suggestions?
+    if current_user.following.count == (User.count)-1
+      return false
+    end
+    return true
+  end
 end
