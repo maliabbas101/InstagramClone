@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :recieved_requests, class_name: :Request, foreign_key: :reciever_id, dependent: :destroy
   has_many :sent_requests, class_name: :Request, foreign_key: :requester_id, dependent: :destroy
 
+  has_many :stories, dependent: :destroy
+
   validates :full_name, :username, :user_type, presence: true
   validates :username, :email, uniqueness: true
   has_one_attached :avatar

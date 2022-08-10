@@ -51,4 +51,10 @@ module UsersHelper
 
     friendships_path(user_id: user.id)
   end
+
+  def if_plus(user)
+    return false if user.stories.count == 0
+
+    true
+  end
 end

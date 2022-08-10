@@ -2,61 +2,68 @@
   <div class="col col-md-8">
     <% @users.each do |user| %>
       <%if user != current_user and current_user.following?(user)%>
-        <% if user.posts.any?%>
-          <% user.posts.each do |post|%>
-            <div class="card m-5" style="width:40rem">
-              <div class="card-header">
-                <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>
-                <%=link_to user.username,user_path(user)%>
-              </div>
-              <div class="card-body">
-                <%=link_to (image_tag post.images.first, width:"600" , height:"500"),post%>
-                <br>
-                <%if post.caption?%>
-                  <%=post.caption%>
-                <%end%>
-                <br>
-                <br>
-                <%=post.likes.count%> Likes
-                <div class="post-actions">
-                  <%if check_like(post).nil?%>
-                    <%= button_to likes_path ,params: {like:{post_id: post.id}}, :action => :post,:remote=>true,class:"like-btn" do %>
-                      <%=image_tag 'unlike.svg', width:"20", height:"20",class:"mr-2"%>
-                    <% end %>
-                  <%else%>
-                    <%= button_to like_path(check_like(post).id), method: :delete,:remote=>true,class:"like-btn" do %>
-                      <%=image_tag 'like.svg', width:"20", height:"20",class:"mr-2"%>
-                    <% end %>
-                  <%end%>
-                  <%=link_to (image_tag 'comment.svg', width:"20", height:"20"),post%>
-                </div>
-                <p class="text-muted"><%= time_ago_in_words post.created_at%> ago</p>
-              </div>
+        <hr>
+        <div class="container">
+          <%= image_tag avatar_selection(user),width:"90", height:"90",class:"rounded-circle"%>
+          <% if_plus(user)%>
+            <%=image_tag 'plus.svg', width:"20", height:"20",class:"mr-2"%>
+      </div>
+      <hr>
+      <% if user.posts.any?%>
+        <% user.posts.each do |post|%>
+          <div class="card m-5" style="width:40rem">
+            <div class="card-header">
+              <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>
+              <%=link_to user.username,user_path(user)%>
             </div>
-          <%end%>
-          <br>
+            <div class="card-body">
+              <%=link_to (image_tag post.images.first, width:"600" , height:"500"),post%>
+              <br>
+              <%if post.caption?%>
+                <%=post.caption%>
+              <%end%>
+              <br>
+              <br>
+              <%=post.likes.count%> Likes
+              <div class="post-actions">
+                <%if check_like(post).nil?%>
+                  <%= button_to likes_path ,params: {like:{post_id: post.id}}, :action => :post,:remote=>true,class:"like-btn" do %>
+                    <%=image_tag 'unlike.svg', width:"20", height:"20",class:"mr-2"%>
+                  <% end %>
+                <%else%>
+                  <%= button_to like_path(check_like(post).id), method: :delete,:remote=>true,class:"like-btn" do %>
+                    <%=image_tag 'like.svg', width:"20", height:"20",class:"mr-2"%>
+                  <% end %>
+                <%end%>
+                <%=link_to (image_tag 'comment.svg', width:"20", height:"20"),post%>
+              </div>
+              <p class="text-muted"><%= time_ago_in_words post.created_at%> ago</p>
+            </div>
+          </div>
         <%end%>
+        <br>
       <%end%>
-    <% end %>
-  </div>
-  <% if show_suggestions?%>
-    <div class="col col-md-4 mt-5">
-      <div class="card w-75">
-        <div class="card-header text-center">
-          Suggestions
-        </div>
-        <div class="card-body">
-          <% @users.each do |user|%>
-            <%if !current_user.following?(user) and current_user!=user%>
-              <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>&nbsp;&nbsp;
-              <%=user.username%>&nbsp;&nbsp;
-              <%= link_to "Follow",friendships_path(user_id: user.id),method: :post,class:"btn btn-secondary btn-sm" %>
-              <br>
-              <br>
-            <%end%>
+    <%end%>
+  <% end %>
+</div>
+<% if show_suggestions?%>
+  <div class="col col-md-4 mt-5">
+    <div class="card w-75">
+      <div class="card-header text-center">
+        Suggestions
+      </div>
+      <div class="card-body">
+        <% @users.each do |user|%>
+          <%if !current_user.following?(user) and current_user!=user%>
+            <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>&nbsp;&nbsp;
+            <%=user.username%>&nbsp;&nbsp;
+            <%= link_to "Follow",friendships_path(user_id: user.id),method: :post,class:"btn btn-secondary btn-sm" %>
+            <br>
+            <br>
           <%end%>
-        </div>
+        <%end%>
       </div>
     </div>
-  <%end%>
+  </div>
+<%end%>
 </div>
