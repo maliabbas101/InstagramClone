@@ -40,4 +40,18 @@ module UsersHelper
     end
     return true
   end
+
+  def requested?(requests,user)
+    requests.each do |request|
+      return true if request.reciever_id == user.id
+    end
+    return false
+  end
+
+  def follow_rout(user)
+    if user.user_type == "Private"
+      return requests_path(reciever_id: user.id)
+    end
+    return friendships_path(user_id: user.id)
+  end
 end

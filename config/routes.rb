@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   get '/users/feed', to: 'users#feed', as: 'pathfeed'
   get 'search', to: 'users#index'
+  post '/requests/approve_request', to: 'requests#approve_request', as: 'accept_req'
   unauthenticated do
     root 'home#index'
   end
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[show]
   resources :friendships , only: %i[create destroy]
+  resources :requests , only: %i[index create destroy edit]
 
   get 'home/index'
   get '/users', to: 'home#index'

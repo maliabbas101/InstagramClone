@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :passive_friendships,  class_name:"Friendship" , foreign_key:"followed_id" ,dependent: :destroy
   has_many :followers, through: :passive_friendships, source: :follower
 
+  has_many :recieved_requests,class_name: :Request,foreign_key: :reciever_id ,dependent: :destroy
+  has_many :sent_requests,class_name: :Request,foreign_key: :requester_id ,dependent: :destroy
+
 
   validates :full_name, :username, :user_type, presence: true
   validates :username, :email, uniqueness: true
@@ -32,6 +35,14 @@ class User < ApplicationRecord
 
   def following?(user)
     following.include?(user)
+  end
+
+  def send_request(user)
+    sent_requests.create(reciever_id: user.id)
+  end
+
+  def delete_request(user)
+    sent_requests.find_by(requester_id: user.id).destroy
   end
 
   private
