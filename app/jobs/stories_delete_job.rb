@@ -1,10 +1,8 @@
 class StoriesDeleteJob < ApplicationJob
-  queue_as :default
+  # queue_as :default
 
-  def perform(stories)
+  def perform(story)
     # Do something later
-    stories.each do |story|
-      story.destroy.set(wait: 1.day)
-    end
+    story.destroy.set(wait: 1.day)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationJob < ActiveJob::Base
-  config.active_job.queue_adapter = :resque
+  # config.active_job.queue_adapter = :resque
 
 end
