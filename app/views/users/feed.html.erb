@@ -2,16 +2,16 @@
 <div class="row row-cols-2">
   <div class="col col-md-8">
     <% @users.each do |user| %>
-      <%if user != current_user and current_user.following?(user)%>
+      <%if user != current_user%>
         <% if user.posts.any?%>
           <% user.posts.each do |post|%>
             <div class="card m-5" style="width:40rem">
               <div class="card-header">
                 <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>
-                <%=link_to user.username,user_path(user)%>
+                <%= user.username%>
               </div>
               <div class="card-body">
-                <%=link_to (image_tag post.images.first, width:"600" , height:"500"),post%>
+                <%= image_tag post.images.first, width:"600" , height:"500"%>
                 <br>
                 <%if post.caption?%>
                   <%=post.caption%>
@@ -48,7 +48,7 @@
         </div>
         <div class="card-body">
           <% @users.each do |user|%>
-            <%if !current_user.following?(user) and current_user!=user%>
+            <%if !current_user.following?(user)%>
               <%= image_tag avatar_selection(user),width:"20", height:"20",class:"rounded-circle"%>&nbsp;&nbsp;
               <%=user.username%>&nbsp;&nbsp;
               <%= link_to "Follow",friendships_path(user_id: user.id),method: :post,class:"btn btn-secondary btn-sm" %>
@@ -61,3 +61,4 @@
     </div>
   <%end%>
 </div>
+
