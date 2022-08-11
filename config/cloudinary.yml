@@ -1,11 +1,5 @@
 development:
-  cloud_name: "dllkbvnu7"
-  api_key: "269392459365443"
-  api_secret: "O5A7PN8dVBf-D2n400Pbfm8g55o"
-  secure: true
-
-production:
-  cloud_name: "dllkbvnu7"
-  api_key: "269392459365443"
-  api_secret: "O5A7PN8dVBf-D2n400Pbfm8g55o"
-  secure: true
+  cloud_name: <%= Rails.application.credentials.fetch(:cloud_name)%>
+  api_key: <%= Rails.application.credentials.fetch(:api_key)%>
+  api_secret: <%= Rails.application.credentials.fetch(:api_secret)%>
+  secure: <%= Rails.application.credentials.fetch(:secure)%>
