@@ -29,23 +29,32 @@
           <br>
         <%end%>
         <%= @user.posts.count%> Posts &nbsp;&nbsp;
-         <%= @user.followers.count%> Followers &nbsp;&nbsp;
-         <%= @user.following.count%> Following &nbsp;&nbsp;
+        <%= @user.followers.count%> Followers &nbsp;&nbsp;
+        <%= @user.following.count%> Following &nbsp;&nbsp;
       </div>
     </div>
   </div>
 </div>
 <hr>
+<%if @posts.count.zero?%>
+  <div class="d-flex flex-row justify-content-around">
+    <div class="p-2">
+      <h2>No Posts Yet</h2>
+    </div>
+  </div>
+<%end%>
 <table>
   <tbody>
     <td >
-      <% @posts.each do |post| %>
-        <tr class="p-1">
-          <% if post.images.attached? && post.images.count>1%>
-            <%# TO DO %>
-          <%end%>
-          <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
-        </tr>
+      <%if @posts.count!=0%>
+        <% @posts.each do |post| %>
+          <tr class="p-1">
+            <% if post.images.attached? && post.images.count>1%>
+              <%# TO DO %>
+            <%end%>
+            <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+          </tr>
+        <%end%>
       <%end%>
     </td>
   </tbody>

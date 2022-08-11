@@ -14,11 +14,11 @@ class Post < ApplicationRecord
   private
 
   def correct_image_type
-    if images.attached?
-      images.each do |image|
-        unless image.content_type.in?(%w[image/jpeg image/png image/gif])
-          errors[:base] << 'One or more image type is not correct.'
-        end
+    return unless images.attached?
+
+    images.each do |image|
+      unless image.content_type.in?(%w[image/jpeg image/png image/gif])
+        errors[:base] << 'One or more image type is not correct.'
       end
     end
   end

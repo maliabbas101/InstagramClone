@@ -1,0 +1,16 @@
+<%= form_with model: [ current_user, current_user.stories.build ] do |form| %>
+
+  <div class="field form-group">
+    <%= form.file_field :images, multiple: true, placeholder:"Select Image or Images", class:"form-control" ,accept:'image/*' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.text_field :user_id,id: :story_user_id,class:"form-control",value: current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-secondary" %>
+  </div>
+<% end %>
+
+

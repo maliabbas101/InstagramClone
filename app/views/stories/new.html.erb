@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">
+    <h1>New Story</h1>
+  </div>
+  <div class="card-body">
+    <%= render 'form', story: @story %>
+    <br>
+    <%= link_to 'Back', pathfeed_path, class:"btn btn-dark" %>
+  </div>
+</div>

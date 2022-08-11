@@ -1,0 +1,21 @@
+<table>
+  <tbody>
+    <td >
+      <% @stories.each do |story| %>
+        <%if story.user_id == params[:user_id].to_i%>
+          <tr class="p-1">
+            <% if story.images.attached? && story.images.count>1%>
+              <%# TO DO %>
+            <%end%>
+            <div class="card w-50">
+              <div class="card-body">
+                <%= link_to image_tag(story.images.first, width:"300" , height:"300",class:"p-2"),user_story_path(user_id: params[:user_id],id: story.id ),class: 'link' %>
+              </div>
+            </div>
+            <br>
+          </tr>
+        <%end%>
+      <%end%>
+    </td>
+  </tbody>
+</table>

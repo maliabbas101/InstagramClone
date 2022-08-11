@@ -1,0 +1,19 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <p>
+          <% if @story.images.attached?%>
+            <% @story.images.each do |image|%>
+              <%= image_tag image , width:"500", height:"500"%>
+            <%end%>
+          <%end%>
+        </p>
+        <%if current_user.id== @story.user_id%>
+          <%= link_to 'Destroy', user_story_path(user_id: params[:user_id], id: params[:id]), method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger"%>
+        <%end%>
+        <%= link_to 'Back', pathfeed_path, class:"btn btn-dark" %>
+      </div>
+    </div>
+  </div>
+</div>

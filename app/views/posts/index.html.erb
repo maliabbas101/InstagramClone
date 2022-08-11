@@ -16,8 +16,8 @@
       <div class="card-body blockquote">
           <strong><h2><%=current_user.username%></h2></strong><br>
           <%= current_user.posts.count%> Posts &nbsp;&nbsp;
-          Followers &nbsp;&nbsp;
-          Following &nbsp;&nbsp;
+          <%= current_user.followers.count%> Followers &nbsp;&nbsp;
+          <%= current_user.following.count%> Following &nbsp;&nbsp;
       </div>
     </div>
 </div>
