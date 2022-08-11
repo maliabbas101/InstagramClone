@@ -54,6 +54,7 @@ module UsersHelper
 
   def if_plus(user)
     return false if user.stories.count.zero?
+
     true
   end
 end

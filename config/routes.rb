@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'resque/server'
 Rails.application.routes.draw do
   get '/users/feed', to: 'users#feed', as: 'pathfeed'
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   end
   authenticated do
     root 'posts#index'
-    mount Resque::Server.new ,at: '/jobs'
+    mount Resque::Server.new, at: '/jobs'
   end
 
   devise_for :users
@@ -21,14 +22,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
-
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[show]
   resources :friendships, only: %i[create destroy]
   resources :requests, only: %i[index create destroy edit]
-
-
 
   get 'home/index'
   get '/users', to: 'home#index'
