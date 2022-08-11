@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class StoriesController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_story, only: %i[show destroy]
   before_action :create_story, only: %i[create]
+
   def index
     @stories = Story.all
   end
@@ -16,11 +17,10 @@ class StoriesController < ApplicationController
   def create
     @story = @user.stories.create(story_params)
     if @story.save
-      StoriesDeleteJob.perform_later @story
+      StoriesDeleteJob.perform_later @story.id
       redirect_to pathfeed_url, notice: 'Story was successfully created.'
     else
-      byebug
-      redirect_to pathfeed_url, notice: 'Something went wrong'
+      redirect_to new_user_story_url, notice: "Story #{@story.errors.full_messages.to_sentence}"
     end
   end
 
@@ -34,7 +34,7 @@ class StoriesController < ApplicationController
 
   private
 
-  def set_post
+  def set_story
     @story = Story.find(params[:id])
   end
 

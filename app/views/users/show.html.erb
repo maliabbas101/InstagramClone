@@ -36,7 +36,7 @@
   </div>
 </div>
 <hr>
-<%if @posts.count == 0%>
+<%if @posts.count.zero?%>
   <div class="d-flex flex-row justify-content-around">
     <div class="p-2">
       <h2>No Posts Yet</h2>
