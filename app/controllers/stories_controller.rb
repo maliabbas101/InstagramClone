@@ -15,7 +15,7 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = @user.stories.create(story_params)
+    @story = @user.stories.new(story_params)
     if @story.save
       StoriesDeleteJob.perform_later @story.id
       redirect_to pathfeed_url, notice: 'Story was successfully created.'
