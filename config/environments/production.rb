@@ -88,7 +88,6 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new($stdout)
@@ -98,4 +97,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'peaceful-inlet-58527.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'mail.google.com',
+    user_name: Rails.application.credentials[:user_name],
+    password: Rails.application.credentials[:password],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end
