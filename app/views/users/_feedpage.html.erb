@@ -1,6 +1,6 @@
  <div class="col col-md-8">
     <% @users.each do |user| %>
-      <%if user != current_user%>
+      <%if !user.eql? current_user && current_user.following?(user)%>
         <% if user.posts.any?%>
           <% user.posts.each do |post|%>
             <div class="card m-5" style="width:40rem">
