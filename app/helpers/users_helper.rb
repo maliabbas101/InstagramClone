@@ -13,12 +13,8 @@ module UsersHelper
     current_user.likes.find_by(post: post)
   end
 
-  def populate_users
-    User.where('full_name ILIKE ?', "%#{params[:q]}%")
-  end
-
   def back_rout(user)
-    return pathfeed_path if current_user != user
+    return pathfeed_users_path if current_user != user
 
     posts_path
   end
@@ -34,20 +30,20 @@ module UsersHelper
   end
 
   def show_suggestions?
-    return false if current_user.following.count == User.count - 1
+    return false if current_user.following.count.succ.eql? User.count
 
     true
   end
 
   def requested?(requests, user)
     requests.each do |request|
-      return true if request.reciever_id == user.id
+      return true if request.reciever_id.eql? user.id
     end
     false
   end
 
   def follow_rout(user)
-    return requests_path(reciever_id: user.id) if user.user_type == 'Private'
+    return requests_path(reciever_id: user.id) if user.is_private?
 
     friendships_path(user_id: user.id)
   end

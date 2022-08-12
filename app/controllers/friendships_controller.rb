@@ -3,13 +3,15 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
+
   def create
-    current_user.follow(@user)
+    current_user.active_friendships.create(followed_id: @user.id)
     redirect_to user_path(@user.id)
   end
 
   def destroy
-    current_user.unfollow(@user)
+    current_user.active_friendships.find_by(followed_id: @user.id).destroy
+
     redirect_to user_path(@user.id)
   end
 

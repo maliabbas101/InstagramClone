@@ -7,13 +7,13 @@
           <div class="card-body">
             <h5 class="card-title" style="text-align: center"><%= image_tag 'bas_image.png', :width=>100%> </h5>
              <br>
-             <p>Click here to login |
-             <%= link_to 'Login', new_user_session_path, class:"btn btn-secondary "%>
-             </p>
+             <h5>Click here to login
+             <%= link_to 'Login', new_user_session_path, class:"btn btn-outline-dark "%>
+             </h5>
              <p class="font-weight-lighter">OR</p>
-             <p>Don't have an account? |
-             <%=link_to 'Signup',  new_user_registration_path,  class:"btn btn-dark"%>
-             </p>
+             <h5>Don't have an account?
+             <%=link_to 'Signup',  new_user_registration_path,  class:"btn btn-outline-dark"%>
+             </h5>
           </div>
         </div>
       </div>

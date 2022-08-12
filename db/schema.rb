@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2022_08_10_173805) do
     t.datetime "locked_at"
     t.string "full_name", null: false
     t.string "username", null: false
-    t.string "user_type", null: false
+    t.integer "user_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

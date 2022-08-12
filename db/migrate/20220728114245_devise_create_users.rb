@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
 
       t.string :full_name
       t.string :username
-      t.string :type
+      t.integer :type
 
       t.timestamps null: false
     end

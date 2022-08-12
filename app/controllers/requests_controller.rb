@@ -3,12 +3,14 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
   before_action :set_user, only: %i[create]
+
   def index
-    @requests = Request.all.where("reciever_id=#{current_user.id}")
+    @requests = Request.all
   end
 
   def create
-    current_user.send_request(@user)
+    current_user.sent_requests.create(reciever_id: @user.id)
+
     redirect_to user_path(@user.id)
   end
 
@@ -23,7 +25,9 @@ class RequestsController < ApplicationController
 
   def approve_request
     @user = User.find(params[:requester_id])
-    @user.follow(current_user)
+    # @user.follow(current_user)
+    current_user.passive_friendships.create(follower_id: @user.id)
+
     redirect_to user_path(@user.id)
   end
 

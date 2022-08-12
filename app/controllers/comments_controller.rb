@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
   before_action :set_post, only: %i[edit update destroy]
   before_action :create_comment, only: %i[create]
+
   def index
     @comments = Comment.all
   end

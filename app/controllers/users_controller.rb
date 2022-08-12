@@ -8,12 +8,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def index
-    @users = populate_users
-  end
-
   def show
     @posts = @user.posts
+  end
+
+  def search
+    @users = User.name_search(params[:q])
   end
 
   private

@@ -19,10 +19,11 @@
   </div>
 
   <div class="field form-group">
-    <%= f.radio_button :user_type,"Private" %>
-    <%= f.label :user_type, 'Private' %>
-    <%= f.radio_button :user_type,"Public" %>
-    <%= f.label :user_type, 'Public' %>
+    <%= f.label :user_type %><br />
+    <%= f.label :user_type, "Private", value: 1  %>
+    <%= f.radio_button :user_type, :private, checked: true %>
+    <%= f.label :user_type, "Public", value: 2 %>
+    <%= f.radio_button :user_type, :public %>
   </div>
 
   <div class="field form-group">
