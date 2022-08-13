@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# require "resque/server"
 Rails.application.routes.draw do
 
   # get 'search', to: 'users#index'
@@ -12,7 +11,6 @@ Rails.application.routes.draw do
   end
   authenticated do
     root "posts#index"
-    # mount Resque::Server.new, at: "/jobs"
   end
 
   devise_for :users
