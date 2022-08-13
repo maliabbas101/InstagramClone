@@ -17,7 +17,8 @@ class StoriesController < ApplicationController
   def create
     @story = @user.stories.new(story_params)
     if @story.save
-      redirect_to pathfeed_users_url, notice: 'Story was successfully created.'
+      DeleteStoryJob.set(wait: 1.day).perform_later(@story.id)
+      redirect_to pathfeed_users_url, notice: "Story was successfully created."
     else
       redirect_to new_user_story_url, notice: "Story #{@story.errors.full_messages.to_sentence}"
     end
@@ -25,9 +26,9 @@ class StoriesController < ApplicationController
 
   def destroy
     if @story.destroy
-      redirect_to pathfeed_url, notice: 'Story was successfully deleted.'
+      redirect_to pathfeed_url, notice: "Story was successfully deleted."
     else
-      redirect_to pathfeed_url, notice: 'Something went wrong'
+      redirect_to pathfeed_url, notice: "Something went wrong"
     end
   end
 

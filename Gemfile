@@ -17,7 +17,7 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cloudinary'
 gem 'jquery-rails'
-gem 'resque'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
