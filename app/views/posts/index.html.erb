@@ -29,7 +29,12 @@
     <% @posts.each do |post| %>
         <%if post.user == current_user%>
           <tr class="p-1">
-            <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+            <% if post.images.count>1%>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4 mult-image'%>
+              <%= image_tag 'multiple_files.png', alt:'', class:"mult-icon" %>
+            <% else %>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+            <%end%>
           </tr>
         <%end%>
       <% end %>

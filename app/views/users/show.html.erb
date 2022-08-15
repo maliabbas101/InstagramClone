@@ -46,15 +46,19 @@
 <table>
   <tbody>
     <td >
+    <% if current_user.following?(@user) or @user.is_public?%>
       <%if @posts.count!=0%>
         <% @posts.each do |post| %>
           <tr class="p-1">
-            <% if post.images.attached? && post.images.count>1%>
-              <%# TO DO %>
+            <% if post.images.count>1%>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+              <%= image_tag 'multiple_files.png', alt:'', class:"mult-icon" %>
+            <% else %>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
             <%end%>
-            <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
           </tr>
         <%end%>
+      <%end%>
       <%end%>
     </td>
   </tbody>

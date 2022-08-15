@@ -26,9 +26,9 @@ class StoriesController < ApplicationController
 
   def destroy
     if @story.destroy
-      redirect_to pathfeed_url, notice: "Story was successfully deleted."
+      redirect_to pathfeed_users_url, notice: "Story was successfully deleted."
     else
-      redirect_to pathfeed_url, notice: "Something went wrong"
+      redirect_to pathfeed_users_url, notice: "Something went wrong"
     end
   end
 

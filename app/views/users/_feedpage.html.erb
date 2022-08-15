@@ -6,24 +6,15 @@
           <div class="card m-5" style="width:40rem">
             <div class="card-header">
               <%= image_tag avatar_selection(user), width: "20" , height: "20" , class: "rounded-circle" %>
-                <%= link_to user.username, user_path(id: user.id) %>
+              <%= link_to user.username, user_path(id: user.id) %>
             </div>
             <div class="card-body">
-              <% if post.images.attached? and post.images.count> 1 %>
-                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="500">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <%= image_tag post.images.first, width: "500" , height: "500",class:" d-block w-100" %>
-                    </div>
-                    <% post.images[1..-1].each do |image| %>
-                      <div class="carousel-item">
-                        <%= image_tag image, width: "500" , height: "500",class:" d-block w-100" %>
-                      </div>
-                   <% end %>
-                 </div>
+              <% if post.images.count>1%>
+                <%= link_to image_tag(post.images.first, width:"500" , height:"500",class:"p-2"), post, class: 'link m-4'%>
+                <%= image_tag 'multiple_files.png', alt:'', class:"mult-iconfeed" %>
               <% else %>
-                <%= image_tag post.images.first, width: "600" , height: "500" %>
-              <% end %>
+                <%= link_to image_tag(post.images.first, width:"500" , height:"500",class:"p-2"), post, class: 'link m-4'%>
+              <%end%>
               <br>
               <% if post.caption? %>
                 <%= post.caption %>
