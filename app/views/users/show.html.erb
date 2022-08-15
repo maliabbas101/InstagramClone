@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="card-text">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar,  :width=>110,:height=>110, :crop=>"fill",:class=> "rounded-circle" %>
+        <%else%>
+          <%= image_tag "person_icon.png", :width=>110,:height=>110, :crop=>"fill",:class=> "rounded-circle" %>
+        <% end %>
+        <br>
+        <h5 class="ml-1.5"><%= @user.full_name%></h5>
+        <h5 class="ml-1.5"><%= @user.user_type.capitalize%>  Account </h5>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <div class="card-body blockquote">
+        <strong>
+          <h2><%=@user.username%></h2>
+        </strong><br>
+        <%if @user!=current_user%>
+          <%if current_user.following?(@user)%>
+            <%= link_to "Unfollow",friendship_path(user_id: @user.id),method: :delete,class:"btn btn-dark" %>
+          <% elsif requested?(current_user.sent_requests,@user) %>
+            Requested
+          <%else%>
+            <%= link_to "Follow",follow_rout(@user) ,method: :post,class:"btn btn-secondary" %>
+          <%end%>
+          <br>
+          <br>
+        <%end%>
+        <%= @user.posts.count%> Posts &nbsp;&nbsp;
+        <%= @user.followers.count%> Followers &nbsp;&nbsp;
+        <%= @user.following.count%> Following &nbsp;&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<%if @posts.count.zero?%>
+  <div class="d-flex flex-row justify-content-around">
+    <div class="p-2">
+      <h2>No Posts Yet</h2>
+    </div>
+  </div>
+<%end%>
+<table>
+  <tbody>
+    <td >
+    <% if current_user.following?(@user) or @user.is_public?%>
+      <%if @posts.count!=0%>
+        <% @posts.each do |post| %>
+          <tr class="p-1">
+            <% if post.images.count>1%>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+              <%= image_tag 'multiple_files.png', alt:'', class:"mult-icon" %>
+            <% else %>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+            <%end%>
+          </tr>
+        <%end%>
+      <%end%>
+      <%end%>
+    </td>
+  </tbody>
+</table>

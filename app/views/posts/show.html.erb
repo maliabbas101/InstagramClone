@@ -1,0 +1,46 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <p>
+          <% if @post.images.attached? and @post.images.count>1 %>
+              <%= render 'slider', locals:{post: @post} %>
+          <%else%>
+            <%= image_tag @post.images.first,width: "500" , height: "500" %>
+          <% end %>
+        </p>
+        <% if @post.caption !="" %>
+          <p>
+            <strong>Caption:</strong>
+            <%= @post.caption %>
+          </p>
+        <% end %>
+        <%= link_to "Edit" , edit_post_path(@post), class: "btn btn-secondary" if policy(@post).update? %>
+        <%= link_to "Destroy" , @post, method: :delete, data: { confirm: "Are you sure?" },
+                  class: "btn btn-danger" if policy(@post).destroy? %>
+
+        <%= link_to "Back" , back_rout(user_details(@post.user_id)), class: "btn btn-dark" %>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <h4>Comments </h4>
+          </div>
+          <div class="card-body">
+            <%= render @post.comments %>
+          </div>
+        </div>
+        <br>
+        <% if current_user.eql? @post.user%>
+          <%= render "users/like" , locals: { post: @post } %>
+        <%end%>
+        <%= render "comments/form" , locals: { post: @post } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

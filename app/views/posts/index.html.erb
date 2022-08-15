@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="card-text">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar, :width=>110,:height=>110, :crop=>"fill",:class=> "rounded-circle border border-dark" %>
+        <%else%>
+          <%= image_tag "person_icon.png",:width=>110,:height=>110, :crop=>"fill",:class=> "rounded-circle border border-dark" %>
+        <% end %>
+        <br>
+       <h5 class="ml-1.5"><%= current_user.full_name%></h5>
+       <h5 class="ml-1.5"><%= current_user.user_type.capitalize%>  Account </h5>
+      </p>
+    </div>
+    <div class="col-sm-6">
+      <div class="card-body blockquote">
+          <strong><h2><%=current_user.username%></h2></strong><br>
+          <%= current_user.posts.count%> Posts &nbsp;&nbsp;
+          <%= current_user.followers.count%> Followers &nbsp;&nbsp;
+          <%= current_user.following.count%> Following &nbsp;&nbsp;
+      </div>
+    </div>
+</div>
+</div>
+<hr>
+<table>
+  <tbody>
+  <td >
+    <% @posts.each do |post| %>
+        <%if post.user == current_user%>
+          <tr class="p-1">
+            <% if post.images.count>1%>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4 mult-image'%>
+              <%= image_tag 'multiple_files.png', alt:'', class:"mult-icon" %>
+            <% else %>
+              <%= link_to image_tag(post.images.first, width:"300" , height:"300",class:"p-2"), post, class: 'link m-4'%>
+            <%end%>
+          </tr>
+        <%end%>
+      <% end %>
+    </td>
+  </tbody>
+</table>
