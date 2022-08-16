@@ -45,6 +45,7 @@
       <% end %>
     <% end %>
 </div>
+
 <% if show_suggestions? %>
   <div class="col col-md-4 mt-5">
     <div class="card w-75">
@@ -53,7 +54,7 @@
       </div>
       <div class="card-body">
         <% @users.each do |user| %>
-          <% if !current_user.following?(user) && user !=current_user && !requested?(user.recieved_requests, user) %>
+          <% if !current_user.following?(user) && user !=current_user && !requested?(user.recieved_requests, user) && user.is_private? %>
             <%= image_tag avatar_selection(user), width: "20" , height: "20" , class: "rounded-circle" %>&nbsp;&nbsp;
               <%= user.username %>&nbsp;&nbsp;
                 <%= link_to "Follow" , friendships_path(user_id: user.id), method: :post,
