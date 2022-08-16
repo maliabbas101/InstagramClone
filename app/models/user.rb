@@ -18,10 +18,12 @@ class User < ApplicationRecord
   has_many :sent_requests, class_name: :Request, foreign_key: :requester_id, dependent: :destroy
   has_many :stories, dependent: :destroy
   has_one_attached :avatar
+
   validates :full_name, :username, :user_type, presence: true
+  validates :full_name, :email, :username, length: { minimum: 5, maximum: 25}
   validates :username, :email, uniqueness: true
   validates :password, confirmation: true
-  validates :full_name, format: { with: /\A[a-z0-9\s]+\Z/i,
+  validates :full_name ,:format => { :with => /\A[a-z\s]+\Z/i,
                                   message: 'can not contain special characters or numerics.' }
   validate :correct_image_type
 

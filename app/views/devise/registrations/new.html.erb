@@ -7,15 +7,15 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field form-group">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"Email",class:"form-control" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"Email", required: true,class:"form-control" %>
   </div>
 
    <div class="field form-group">
-    <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name",placeholder:"Full Name",class:"form-control" %>
+    <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name",placeholder:"Full Name",required: true,class:"form-control" %>
   </div>
 
   <div class="field form-group">
-    <%= f.text_field :username, autofocus: true, autocomplete: "username",placeholder:"Username",class:"form-control" %>
+    <%= f.text_field :username, autofocus: true, autocomplete: "username",placeholder:"Username",required: true,class:"form-control" %>
   </div>
 
   <div class="field form-group">
@@ -27,11 +27,11 @@
   </div>
 
   <div class="field form-group">
-    <%= f.password_field :password, autocomplete: "new-password",placeholder:"Password(6 characters minimum)",class:"form-control" %>
+    <%= f.password_field :password, autocomplete: "new-password",placeholder:"Password(6 characters minimum)",required: true,class:"form-control" %>
   </div>
 
   <div class="field form-group">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"Confirm your Password",class:"form-control" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"Confirm your Password",required: true,class:"form-control" %>
   </div>
   <div class="field form-group">
     <%= f.file_field :avatar,placeholder:"Display Picture",class:"form-control",accept:'image/*' %>
