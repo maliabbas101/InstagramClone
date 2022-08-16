@@ -57,7 +57,7 @@
           <% if !current_user.following?(user) && user !=current_user && !requested?(user.recieved_requests, user)%>
             <%= image_tag avatar_selection(user), width: "20" , height: "20" , class: "rounded-circle" %>&nbsp;&nbsp;
               <%= user.username %>&nbsp;&nbsp;
-                <%= link_to "Follow" ,follow_rout(@user), method: :post,
+                <%= link_to "Follow" ,follow_rout(user), method: :post,
                   class: "btn btn-secondary btn-sm" %>
                   <br>
                   <br>
