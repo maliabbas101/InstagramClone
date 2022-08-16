@@ -6,24 +6,16 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.new(like_params)
     @post = @like.post
-    respond_to do |format|
-      if @like.save
-        format.js
-        format.html { redirect_to pathfeed_users_path }
-      else
-        format.js
-        format.html { flash[:notice] = @like.errors.full_messages }
-      end
-
+    if @like.save
+      redirect_to pathfeed_users_path
+    else
+      flash[:notice] = @like.errors.full_messages
     end
   end
 
   def destroy
     @like.destroy
-    respond_to do |format|
-      format.js
-      format.html { redirect_to pathfeed_users_path }
-    end
+      redirect_to pathfeed_users_path
   end
 
   private
