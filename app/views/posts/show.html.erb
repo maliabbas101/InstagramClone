@@ -32,7 +32,9 @@
         </div>
         <br>
         <% if current_user.eql? @post.user%>
-          <%= render "users/like" , locals: { post: @post } %>
+          <div id='like_pane'>
+            <%= render "users/like" , locals: { post: @post } %>
+          </div>
         <%end%>
         <%= render "comments/form" , locals: { post: @post } %>
       </div>
