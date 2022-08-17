@@ -28,9 +28,9 @@ class RequestsController < ApplicationController
     ActiveRecord::Base.transaction do
       if current_user.passive_friendships.create!(follower_id: @user.id)
         @user.sent_requests.find_by(reciever_id: current_user.id).destroy
-        redirect_to user_path(@user.id) , notice:"Request Accepted."
+        redirect_to user_path(@user.id) , notice: "Request Accepted."
       else
-        redirect_to user_path(@user.id), notice:"Something went wrong."
+        redirect_to user_path(@user.id), notice: "Something went wrong."
       end
     end
   rescue ActiveRecord::RecordInvalid

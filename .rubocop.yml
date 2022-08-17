@@ -4,6 +4,8 @@ require:
   - rubocop-minitest # or rubocop-minitest
 
 
+
+
 AllCops:
   # Exclude auto-generated files by Rails
   TargetRubyVersion: 2.7
@@ -12,7 +14,10 @@ AllCops:
     - 'db/schema.rb'
     - 'node_modules/**/*'
     - 'vendor/bundle/**/*'
+    - 'vendor/cache/**/*'
     - 'bin/**/*'
+    - 'db/migrate/**/*'
+    - 'config/initializers/**/*'
 
 Layout/LineLength:
   Max: 120
@@ -31,3 +36,6 @@ Lint/AmbiguousBlockAssociation:
 
 Style/Documentation:
   Enabled: false
+
+inherit_gem:
+  rubocop-discourse: default.yml

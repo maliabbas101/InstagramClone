@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PostPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -15,6 +16,7 @@ class PostPolicy < ApplicationPolicy
 
   def show?
     user.present?
+    return current_user.following?(user) unless user_is_private
   end
 
   def edit?

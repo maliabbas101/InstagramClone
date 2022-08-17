@@ -20,11 +20,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :full_name, :username, :user_type, presence: true
-  validates :full_name, :email, :username, length: { minimum: 5, maximum: 25}
+  validates :full_name, :email, :username, length: { minimum: 5, maximum: 25 }
   validates :username, :email, uniqueness: true
   validates :password, confirmation: true
-  validates :full_name ,:format => { :with => /\A[a-z\s]+\Z/i,
-                                  message: 'can not contain special characters or numerics.' }
+  validates :full_name , format: { with: /\A[a-z\s]+\Z/i,
+                                   message: 'can not contain special characters or numerics.' }
   validate :correct_image_type
 
   enum user_type: { 'private': 1, 'public': 2 }, _prefix: :is

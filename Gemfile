@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
   gem 'rubocop-performance'
   gem 'rubocop-rails'
+  gem 'rubocop-discourse'
 end
 
 group :development do
