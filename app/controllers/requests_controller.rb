@@ -25,10 +25,16 @@ class RequestsController < ApplicationController
 
   def approve_request
     @user = User.find(params[:requester_id])
-    # @user.follow(current_user)
-    current_user.passive_friendships.create(follower_id: @user.id)
-
-    redirect_to user_path(@user.id)
+    ActiveRecord::Base.transaction do
+      if current_user.passive_friendships.create!(follower_id: @user.id)
+        @user.sent_requests.find_by(reciever_id: current_user.id).destroy
+        redirect_to user_path(@user.id) , notice:"Request Accepted."
+      else
+        redirect_to user_path(@user.id), notice:"Something went wrong."
+      end
+    end
+  rescue ActiveRecord::RecordInvalid
+    redirect_to user_path(@user.id), notice: 'Request was not accepted successfully.'
   end
 
   private
