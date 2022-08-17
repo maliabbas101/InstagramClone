@@ -5,17 +5,20 @@ class StoriesController < ApplicationController
   before_action :create_story, only: %i[create]
 
   def index
-    @stories = Story.all
+    @stories = Story.all.specific_user(params[:user_id])
+    authorize @stories
   end
 
   def show; end
 
   def new
     @story = Story.new
+    authorize @story
   end
 
   def create
     @story = @user.stories.new(story_params)
+    authorize @story
     if @story.save
       DeleteStoryJob.set(wait: 1.day).perform_later(@story.id)
       redirect_to pathfeed_users_url, notice: "Story was successfully created."
@@ -36,6 +39,7 @@ class StoriesController < ApplicationController
 
   def set_story
     @story = Story.find(params[:id])
+    authorize @story
   end
 
   def story_params

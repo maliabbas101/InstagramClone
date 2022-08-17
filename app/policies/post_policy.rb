@@ -10,20 +10,12 @@ class PostPolicy < ApplicationPolicy
     check_user?
   end
 
-  def create?
-    check_user?
-  end
-
   def show?
     user.present?
-
+    return user.following?(@record.user), notice: 'Not Authorized' unless @record.user.is_private?
   end
 
   def edit?
-    check_user_owns_record?
-  end
-
-  def update?
     check_user_owns_record?
   end
 
