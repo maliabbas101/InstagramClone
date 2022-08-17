@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     authorize @post
     if @post.save
-      redirect_to @post, notice: "Post was successfully created."
+      redirect_to @post, notice: 'Post was successfully created'
     else
       render "new", notice: "Something went wrong"
     end

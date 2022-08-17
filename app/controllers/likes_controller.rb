@@ -17,7 +17,7 @@ class LikesController < ApplicationController
     if @like.destroy
       redirect_to pathfeed_users_path
     else
-      redirect_to pathfeed_users_path , notice:"Like #{@like.errors.full_messages.to_sentence}"
+      redirect_to pathfeed_users_path, notice: "Like #{@like.errors.full_messages.to_sentence}"
     end
   end
 
