@@ -1,9 +1,9 @@
        <% if check_like(@post).nil? %>
-          <%= button_to likes_path, params: { like: { post_id: @post.id } }, :action => :post, :remote => true, class: "like-btn" do %>
+          <%= button_to likes_path, params: { like: { post_id: @post.id } }, :action => :post, class: "like-btn" do %>
             <%= image_tag "unlike.svg", width: "20", height: "20", class: "mr-2" %>
               <% end %>
         <% else %>
-          <%= button_to like_path(check_like(@post).id), method: :delete, :remote => true, class: "like-btn" do %>
+          <%= button_to like_path(check_like(@post).id), method: :delete, class: "like-btn" do %>
             <%= image_tag "like.svg", width: "20", height: "20", class: "mr-2" %>
           <% end %>
         <% end %>

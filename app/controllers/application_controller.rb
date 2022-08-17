@@ -22,8 +22,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, notice: 'You are not authorized to perform this action.')
   end
 
   def record_not_found

@@ -19,6 +19,12 @@ module UsersHelper
     posts_path
   end
 
+  def like_back(user, post_id)
+    return pathfeed_users_path if current_user != user
+
+    post_path(id: post_id)
+  end
+
   def user_details(id)
     User.find(id)
   end

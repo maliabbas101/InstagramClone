@@ -16,7 +16,7 @@ class PostPolicy < ApplicationPolicy
 
   def show?
     user.present?
-    return current_user.following?(user) unless user_is_private
+
   end
 
   def edit?
@@ -38,6 +38,6 @@ class PostPolicy < ApplicationPolicy
   end
 
   def check_user_owns_record?
-    @user == @record.user
+    @user.eql? @record.user
   end
 end
