@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    authorize @comment
   end
 
   def edit; end
@@ -50,6 +51,7 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
+    authorize @comment
   end
 
   def create_comment

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class PostPolicy < ApplicationPolicy
+  include UsersHelper
   class Scope < Scope
     def resolve
       scope.all
@@ -11,8 +12,9 @@ class PostPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
-    return user.following?(@record.user), notice: 'Not Authorized' unless @record.user.is_private?
+    if check_user?
+      user.following?(user_details(@record.user_id)) or check_user_owns_record?
+    end
   end
 
   def edit?
