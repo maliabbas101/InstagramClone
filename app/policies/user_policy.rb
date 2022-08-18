@@ -7,18 +7,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def search?
-    user_is_there?
+    user_auth?
   end
 
   def feed?
-    user_is_there?
+    user_auth?
   end
 
   def show?
-    user_is_there?
+    user_auth?
   end
 
-  def user_is_there?
-    user.present?
-  end
 end

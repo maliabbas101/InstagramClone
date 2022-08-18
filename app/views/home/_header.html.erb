@@ -17,7 +17,7 @@
           <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Add Post', new_post_path, class: 'nav-link' if policy(current_user).user_is_there?  %>
+          <%= link_to 'Add Post', new_post_path, class: 'nav-link' if policy(current_user).user_auth?  %>
         </li>
         <li class="nav-item">
           <%= link_to 'Requests', requests_path, class: 'nav-link' %>

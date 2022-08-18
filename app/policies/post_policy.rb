@@ -1,37 +1,31 @@
 # frozen_string_literal: true
 class PostPolicy < ApplicationPolicy
-  include UsersHelper
   class Scope < Scope
     def resolve
       scope.all
     end
   end
 
-  def new?
-    check_user?
+  def index?
+    user_auth?
   end
 
   def show?
-    if check_user?
-      user.following?(user_details(@record.user_id)) or check_user_owns_record?
+    if user_auth? && record_not_nil?
+      return true if @user.following?(@record.user) || !check_private? || @user == @record.user
     end
   end
 
-  def edit?
-    check_user_owns_record?
+  def create?
+    return true if record_not_nil? && user_auth?
+  end
+
+  def update?
+    return true if user_auth? && record_not_nil? && user_is_owner_ofrecord?
   end
 
   def destroy?
-    check_user_owns_record?
+    return true if user_auth? && record_not_nil? && user_is_owner_ofrecord?
   end
 
-  private
-
-  def check_user?
-    user.present?
-  end
-
-  def check_user_owns_record?
-    @user.eql? @record.user
-  end
 end

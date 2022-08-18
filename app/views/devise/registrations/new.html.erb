@@ -25,14 +25,15 @@
     <%= f.label :user_type, "Public", value: 2 %>
     <%= f.radio_button :user_type, :public %>
   </div>
-
   <div class="field form-group">
-    <%= f.password_field :password, autocomplete: "new-password",placeholder:"Password(6 characters minimum)",required: true,class:"form-control" %>
+    <%= f.password_field :password, autocomplete: "new-password",placeholder:"Password(6 characters minimum)",required: true,class:"form-control", id:"password",:onkeyup => 'check();' %>
   </div>
 
   <div class="field form-group">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"Confirm your Password",required: true,class:"form-control" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"Confirm your Password",required: true,class:"form-control",id:"confirm_password",:onkeyup => 'check();' %>
+    <span id='message' class="m-2"></span>
   </div>
+
   <div class="field form-group">
     <%= f.file_field :avatar,placeholder:"Display Picture",class:"form-control",accept:'image/*' %>
   </div>

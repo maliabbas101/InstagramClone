@@ -3,11 +3,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   def index
     @posts = Post.all
-    @posts = policy_scope(Post).reverse
+    authorize @posts
   end
 
   def show; end
@@ -55,4 +54,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:caption, :user_id, images: [])
   end
+
 end
