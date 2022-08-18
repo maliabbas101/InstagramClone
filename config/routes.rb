@@ -23,10 +23,10 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :users, only: %i[show]
   resources :friendships, only: %i[create destroy]
-  resources :requests, only: %i[index create destroy edit]
-
+  resources :requests, only: %i[index create destroy] do
+    member do
+      post :edit
+    end
+  end
   get :search, controller: :users
-  post "requests/approve_request", to: "requests#approve_request", as: "accept_req"
-  match "/404", to: "errors#not_found", via: :all
-  match "/404", to: "errors#not_found", via: :all
 end

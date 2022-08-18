@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   before_action :set_post, only: %i[edit update destroy]
-  before_action :create_comment, only: %i[create]
-
-  def index
-    @comments = Comment.all
-  end
-
-  def show; end
+  before_action :set_post_with, only: %i[create]
 
   def new
     @comment = Comment.new
@@ -20,6 +14,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.create(comment_params)
+    authorize @comment
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
@@ -47,6 +42,7 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+    authorize @post
   end
 
   def set_comment
@@ -54,7 +50,7 @@ class CommentsController < ApplicationController
     authorize @comment
   end
 
-  def create_comment
+  def set_post_with
     @post = Post.find(params[:comment][:post_id])
   end
 

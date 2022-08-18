@@ -1,9 +1,5 @@
 <% unless !comment.persisted? %>
-  <% if   useravatar(comment.user_id).attached?%>
-    <%= image_tag useravatar(comment.user_id) , width:"20", height:"20", class:"rounded-circle"%>
-  <% else %>
-    <%= image_tag 'person_icon.png' , width:"20", height:"20", class:"rounded-circle"%>
-  <%end%>
+  <%= image_tag avatar_selection(user_details(comment.user_id)) , width:"20", height:"20", class:"rounded-circle"%>
   <strong><%= username(comment.user_id)%></strong>
     <%= comment.body%>
     <%if current_user== comment.post.user%>

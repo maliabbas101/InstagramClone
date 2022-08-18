@@ -9,46 +9,40 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def index?
-    if !check_authn?
+    if user_auth?
       if !@record.empty?
-        user.following?(user_details(@record.first.user_id)) or check_owner?
+        return true if user.following?(user_details(@record.first.user_id)) || check_owner?
       end
     end
   end
 
-  def new?
-    check_user?
+  def create?
+    user_auth?
   end
 
   def show?
-    if !check_authn?
-      user.following?(user_details(@record.user_id)) or check_user_owns_record?
+    if user_auth?
+      return true if user.following?(user_details(@record.user_id)) || user_is_owner_ofrecord?
     end
   end
 
   def edit?
-    check_user_owns_record?
+    if user_auth?
+      return true if user_is_owner_ofrecord?
+    end
   end
 
   def destroy?
-    check_user_owns_record?
+    if user_auth?
+      return true if user_is_owner_ofrecord?
+    end
   end
 
   private
 
-  def check_user?
-    user.present?
-  end
-
-  def check_user_owns_record?
-    @user.id.eql? @record.user_id
-  end
 
   def check_owner?
     @user.id.eql? @record.first.user_id
   end
 
-  def check_authn?
-    @user.eql? nil
-  end
 end

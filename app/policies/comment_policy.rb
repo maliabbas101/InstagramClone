@@ -6,34 +6,22 @@ class CommentPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    !check_authn?
+  def create?
+    if user_auth?
+      return true if user.following?(@record.user) || user_is_owner_ofrecord? || @record.user.is_public?
+    end
   end
 
-  def show?
-    !check_authn?
-  end
-
-  def edit?
-    if !check_authn?
-      check_user_owns_record?
+  def update?
+    if user_auth?
+      return true if user_is_owner_ofrecord?
     end
   end
 
   def destroy?
-    if !check_authn?
-      check_user_owns_record?
+    if user_auth?
+      return true if user_is_owner_ofrecord?
     end
-  end
-
-  private
-
-  def check_authn?
-    @user.eql? nil
-  end
-
-  def check_user_owns_record?
-    @user.eql? @record.user
   end
 
 end

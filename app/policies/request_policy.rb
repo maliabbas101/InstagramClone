@@ -7,11 +7,25 @@ class RequestPolicy < ApplicationPolicy
   end
 
   def index?
-    !check_authn?
+    user_auth?
   end
 
-  private
-  def check_authn?
-    @user.eql? nil
+  def create?
+    if user_auth?
+      return true if @user.id.eql? @record.requester_id
+    end
   end
+
+  def update?
+    if user_auth?
+      return true if @user.id.eql? @record.reciever_id
+    end
+  end
+
+  def destroy?
+    if user_auth?
+      return true if @user.id.eql? @record.reciever_id
+    end
+  end
+
 end
