@@ -24,13 +24,12 @@ u3.save!
 f1 = Friendship.create!(follower_id: u1.id, followed_id: u2.id)
 f1.save!
 
-
 Post.create(caption: 'post1', user_id: u1.id) do |post|
   post.images.attach(io: File.open('app/assets/images/paint.jpeg'), filename: 'p1.jpeg')
 end
 
 3.times do |i|
-  Post.create(caption: 'This is my first Post.',user_id: i) do |post|
+  Post.create(caption: 'This is my first Post.', user_id: i) do |post|
     post.images.attach(io: File.open('app/assets/images/paint.jpeg'), filename: 'p1.jpeg')
   end
   Story.create(user_id: i) do |story|
