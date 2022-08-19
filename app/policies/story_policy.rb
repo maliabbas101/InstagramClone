@@ -40,7 +40,6 @@ class StoryPolicy < ApplicationPolicy
 
   private
 
-
   def check_owner?
     @user.id.eql? @record.first.user_id
   end
