@@ -9,6 +9,6 @@ class Story < ApplicationRecord
 
   private
   def set_timer
-    DeleteStoryJob.set(wait: 1.minute).perform_later(self.id)
+    DeleteStoryJob.set(wait: 1.day).perform_later(self.id)
   end
 end
