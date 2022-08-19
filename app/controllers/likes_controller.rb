@@ -6,6 +6,7 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(like_params)
+    authorize @like
     @post = @like.post
     if @like.save
       redirect_to like_back(user_details(@post.user_id), @post.id)
@@ -27,6 +28,7 @@ class LikesController < ApplicationController
 
   def set_like
     @like = current_user.likes.find(params[:id])
+    authorize @like
   end
 
   def like_params

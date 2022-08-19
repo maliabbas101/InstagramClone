@@ -2,14 +2,14 @@
 
 Rails.application.routes.draw do
   unauthenticated do
-    root "home#index"
+    root controller: :home , action: :index
   end
   authenticated do
-    root "posts#index"
+    root controller: :posts , action: :index
   end
   devise_for :users
 
-  resources :users do
+  resources :users, only: %i[] do
     collection do
       get "/feed", to: "users#feed", as: "pathfeed"
     end
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments
+    resources :comments, only: %i[new edit create update destroy]
   end
 
   resources :likes, only: %i[create destroy]
