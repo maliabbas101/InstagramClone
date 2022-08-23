@@ -27,6 +27,10 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-discourse'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 5.1'
+  gem 'simplecov', require: false
 end
 
 group :development do
