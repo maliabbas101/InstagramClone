@@ -30,7 +30,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers', '~> 5.1'
+  gem 'shoulda-callback-matchers', '~> 1.1', '>= 1.1.4'
   gem 'simplecov', require: false
+  gem 'faker'
 end
 
 group :development do

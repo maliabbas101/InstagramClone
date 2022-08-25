@@ -98,6 +98,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -253,6 +255,8 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    shoulda-callback-matchers (1.1.4)
+      activesupport (>= 3)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     sidekiq (6.5.4)
@@ -315,6 +319,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.8, >= 4.8.1)
   factory_bot_rails
+  faker
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
@@ -330,6 +335,7 @@ DEPENDENCIES
   rubocop-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  shoulda-callback-matchers (~> 1.1, >= 1.1.4)
   shoulda-matchers (~> 5.1)
   sidekiq
   simplecov

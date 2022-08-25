@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to pathfeed_users_url, notice: "Story was successfully created."
     else
-      redirect_to new_user_story_url, notice: "Story #{@story.errors.full_messages.to_sentence}"
+      redirect_to new_user_story_url, notice: "Story #{@story.errors.full_messages.to_sentence}",status: :unprocessable_entity
     end
   end
 

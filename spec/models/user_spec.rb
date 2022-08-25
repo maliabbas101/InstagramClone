@@ -15,6 +15,14 @@ RSpec.describe User , type: :model do
   context 'validations' do
     it { is_expected.to validate_presence_of(:full_name) }
     it { is_expected.to validate_presence_of(:username) }
+    it { is_expected.to validate_uniqueness_of(:username) }
     it { is_expected.to validate_presence_of(:user_type) }
+  end
+
+  context 'Follow check' do
+    let(:user) {build :user }
+    it 'Follow method' do
+      expect(user.following?(user)).to eq(false)
+    end
   end
 end

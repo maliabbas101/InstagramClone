@@ -25,8 +25,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :full_name , format: { with: /\A[a-z\s]+\Z/i,
                                    message: 'can not contain special characters or numerics.' }
-  validate :correct_image_type
-
   enum user_type: { 'private': 1, 'public': 2 }, _prefix: :is
 
   scope :name_search, ->(name) { where('full_name ILIKE ?', "%#{name}%") }
@@ -35,10 +33,4 @@ class User < ApplicationRecord
     following.include?(user)
   end
 
-  private
-
-  def correct_image_type
-    (return unless avatar.attached? && !avatar.content_type.in?(%w[image/jpeg image/png image/gif]))
-    errors[:base] << 'Image type is not correct.'
-  end
 end

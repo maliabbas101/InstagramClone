@@ -5,11 +5,6 @@ class CommentsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
   before_action :set_post_with, only: %i[create]
 
-  def new
-    @comment = Comment.new
-    authorize @comment
-  end
-
   def edit; end
 
   def create
@@ -18,7 +13,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
-      redirect_to post_url(@post), notice: "Comment #{@comment.errors.full_messages.to_sentence}"
+      redirect_to post_url(@post), notice: "Comment #{@comment.errors.full_messages.to_sentence}",status: :unprocessable_entity
     end
   end
 
@@ -26,7 +21,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to @post, notice: 'Comment was successfully updated.'
     else
-      redirect_to edit_post_comment_url, notice: "Comment #{@comment.errors.full_messages.to_sentence}"
+      redirect_to edit_post_comment_url, notice: "Comment #{@comment.errors.full_messages.to_sentence}",status: :unprocessable_entity
     end
   end
 
@@ -34,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       redirect_to @post, notice: 'Comment was successfully deleted.'
     else
-      redirect_to comments_url, notice: 'Something went wrong'
+      redirect_to post_url(@post), notice: 'Something went wrong'
     end
   end
 
@@ -51,7 +46,7 @@ class CommentsController < ApplicationController
   end
 
   def set_post_with
-    @post = Post.find(params[:comment][:post_id])
+    @post = Post.find(params[:post_id])
   end
 
   def comment_params
