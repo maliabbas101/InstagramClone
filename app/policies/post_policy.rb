@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PostPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -5,37 +6,26 @@ class PostPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    check_user?
-  end
-
-  def create?
-    check_user?
+  def index?
+    user_auth?
   end
 
   def show?
-    user.present?
+    if user_auth? && record_not_nil?
+      return true if @user.following?(@record.user) || !check_private? || @user == @record.user
+    end
   end
 
-  def edit?
-    check_user_owns_record?
+  def create?
+    return true if record_not_nil? && user_auth?
   end
 
   def update?
-    check_user_owns_record?
+    return true if user_auth? && record_not_nil? && user_is_owner_ofrecord?
   end
 
   def destroy?
-    check_user_owns_record?
+    return true if user_auth? && record_not_nil? && user_is_owner_ofrecord?
   end
 
-  private
-
-  def check_user?
-    user.present?
-  end
-
-  def check_user_owns_record?
-    @user == @record.user
-  end
 end

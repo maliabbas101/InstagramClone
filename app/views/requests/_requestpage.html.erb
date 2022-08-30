@@ -15,7 +15,7 @@
             <td><%= user_details(request.requester_id).full_name %></td>
             <td><%= username(request.requester_id)%></td>
             <td><%= user_details(request.requester_id).email %></td>
-            <td>  <%= link_to 'Accept', accept_req_path(requester_id: user_details(request.requester_id).id) , method: :post, class:"btn btn-success" %>  <%= link_to 'Decline', request_path(request.id) ,method: :delete, class:"btn btn-danger" %>
+            <td>  <%= link_to 'Accept', edit_request_path(request.id) , method: :post, class:"btn btn-success" %>  <%= link_to 'Decline', request_path(request.id) ,method: :delete, class:"btn btn-danger" %>
             </td>
           </tr>
         <%end%>

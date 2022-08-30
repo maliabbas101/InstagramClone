@@ -1,21 +1,2 @@
-  <div class="card text-center">
-    <div class="row">
-      <div class="col-sm-6">
-        <p class="card-text"><%= image_tag "homepage.png", :width=>600%></p>
-      </div>
-      <div class="col-sm-6">
-          <div class="card-body">
-            <h5 class="card-title" style="text-align: center"><%= image_tag 'bas_image.png', :width=>100%> </h5>
-             <br>
-             <h5>Click here to login
-             <%= link_to 'Login', new_user_session_path, class:"btn btn-outline-dark "%>
-             </h5>
-             <p class="font-weight-lighter">OR</p>
-             <h5>Don't have an account?
-             <%=link_to 'Signup',  new_user_registration_path,  class:"btn btn-outline-dark"%>
-             </h5>
-          </div>
-        </div>
-      </div>
-    </div>
+<%= render 'homecontent' %>
 

@@ -1,28 +1,26 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
+  include UsersHelper
   before_action :set_like, only: %i[destroy]
 
   def create
     @like = current_user.likes.new(like_params)
+    authorize @like
     @post = @like.post
-    respond_to do |format|
-      if @like.save
-        format.js
-        format.html { redirect_to pathfeed_users_path }
-      else
-        format.js
-        format.html { flash[:notice] = @like.errors.full_messages }
-      end
-
+    if @like.save
+      redirect_to like_back(user_details(@post.user_id), @post.id)
+    else
+      flash[:notice] = @like.errors.full_messages
     end
   end
 
   def destroy
-    @like.destroy
-    respond_to do |format|
-      format.js
-      format.html { redirect_to pathfeed_users_path }
+    @post = @like.post
+    if @like.destroy
+      redirect_to like_back(user_details(@post.user_id), @post.id)
+    else
+      redirect_to pathfeed_users_path, notice: "Like #{@like.errors.full_messages.to_sentence}"
     end
   end
 
@@ -30,6 +28,7 @@ class LikesController < ApplicationController
 
   def set_like
     @like = current_user.likes.find(params[:id])
+    authorize @like
   end
 
   def like_params

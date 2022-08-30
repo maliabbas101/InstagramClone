@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 
 class RequestsController < ApplicationController
+  include UsersHelper
   before_action :authenticate_user!, only: %i[create destroy]
   before_action :set_user, only: %i[create]
+  before_action :set_request, only: %i[edit destroy]
 
   def index
     @requests = Request.all
+    authorize @requests
   end
 
   def create
-    current_user.sent_requests.create(reciever_id: @user.id)
-
+    @request = current_user.sent_requests.create(reciever_id: @user.id)
+    authorize @request
     redirect_to user_path(@user.id)
   end
 
   def destroy
-    @request = Request.find(params[:id])
     if @request.destroy
       redirect_to requests_url, notice: 'Request was successfully deleted.'
     else
@@ -23,17 +25,19 @@ class RequestsController < ApplicationController
     end
   end
 
-  def approve_request
-    @user = User.find(params[:requester_id])
-    # @user.follow(current_user)
-    current_user.passive_friendships.create(follower_id: @user.id)
-
-    redirect_to user_path(@user.id)
+  def edit
+    @user = User.find(@request.requester_id)
+    accept_request(@user)
   end
 
   private
 
   def set_user
     @user = User.find(params[:reciever_id])
+  end
+
+  def set_request
+    @request = Request.find(params[:id])
+    authorize @request
   end
 end

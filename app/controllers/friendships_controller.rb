@@ -5,13 +5,14 @@ class FriendshipsController < ApplicationController
   before_action :set_user
 
   def create
-    current_user.active_friendships.create(followed_id: @user.id)
+    @friendship = current_user.active_friendships.create(followed_id: @user.id)
+    authorize @friendship
     redirect_to user_path(@user.id)
   end
 
   def destroy
-    current_user.active_friendships.find_by(followed_id: @user.id).destroy
-
+    @friendship = current_user.active_friendships.find_by(followed_id: @user.id).destroy
+    authorize @friendship
     redirect_to user_path(@user.id)
   end
 

@@ -1,28 +1,19 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   before_action :set_post, only: %i[edit update destroy]
-  before_action :create_comment, only: %i[create]
-
-  def index
-    @comments = Comment.all
-  end
-
-  def show; end
-
-  def new
-    @comment = Comment.new
-  end
+  before_action :set_post_with, only: %i[create]
 
   def edit; end
 
   def create
     @comment = @post.comments.create(comment_params)
+    authorize @comment
     if @comment.save
       redirect_to @post, notice: 'Comment was successfully added.'
     else
-      redirect_to post_url(@post), notice: "Comment #{@comment.errors.full_messages.to_sentence}"
+      redirect_to post_url(@post), notice: "Comment was not created successfuly.",status: :unprocessable_entity
     end
   end
 
@@ -30,7 +21,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to @post, notice: 'Comment was successfully updated.'
     else
-      redirect_to edit_post_comment_url, notice: "Comment #{@comment.errors.full_messages.to_sentence}"
+      redirect_to edit_post_comment_url, notice: "Comment was not updated successfully.",status: :unprocessable_entity
     end
   end
 
@@ -38,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       redirect_to @post, notice: 'Comment was successfully deleted.'
     else
-      redirect_to comments_url, notice: 'Something went wrong'
+      redirect_to post_url(@post), notice: 'Something went wrong'
     end
   end
 
@@ -46,14 +37,16 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+    authorize @post
   end
 
   def set_comment
     @comment = Comment.find(params[:id])
+    authorize @comment
   end
 
-  def create_comment
-    @post = Post.find(params[:comment][:post_id])
+  def set_post_with
+    @post = Post.find(params[:post_id])
   end
 
   def comment_params

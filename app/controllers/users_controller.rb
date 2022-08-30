@@ -6,14 +6,17 @@ class UsersController < ApplicationController
 
   def feed
     @users = User.all
+    authorize @users
   end
 
   def show
     @posts = @user.posts
+    authorize @user
   end
 
   def search
     @users = User.name_search(params[:q])
+    authorize @users
   end
 
   private

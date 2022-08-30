@@ -2,7 +2,7 @@
   <tbody>
     <td >
       <% @stories.each do |story| %>
-        <%if story.user_id == params[:user_id].to_i%>
+        <%#if story.user_id == params[:user_id].to_i%>
           <tr class="p-1">
             <% if story.images.attached? && story.images.count>1%>
             <%end%>
@@ -13,7 +13,7 @@
             </div>
             <br>
           </tr>
-        <%end%>
+        <%#end%>
       <%end%>
     </td>
   </tbody>

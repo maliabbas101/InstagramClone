@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-u1 = User.find_or_create_by(full_name: 'Ali Abbas', email: 'ali@gmail.com', username: 'ali1',
+u1 = User.find_or_create_by(full_name: 'Ali Abbas', email: 'ali@gmail.com', username: 'ali123',
                             user_type: User.user_types[:private]) do |user|
   user.password = '123456'
 end
@@ -23,3 +23,16 @@ u3.save!
 
 f1 = Friendship.create!(follower_id: u1.id, followed_id: u2.id)
 f1.save!
+
+Post.create(caption: 'post1', user_id: u1.id) do |post|
+  post.images.attach(io: File.open('app/assets/images/paint.jpeg'), filename: 'p1.jpeg')
+end
+
+3.times do |i|
+  Post.create(caption: 'This is my first Post.', user_id: i) do |post|
+    post.images.attach(io: File.open('app/assets/images/paint.jpeg'), filename: 'p1.jpeg')
+  end
+  Story.create(user_id: i) do |story|
+    story.images.attach(io: File.open('app/assets/images/story.jpeg'), filename: 's1.jpeg')
+  end
+end

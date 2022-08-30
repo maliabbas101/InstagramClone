@@ -19,6 +19,12 @@ module UsersHelper
     posts_path
   end
 
+  def like_back(user, post_id)
+    return pathfeed_users_path if current_user != user
+
+    post_path(id: post_id)
+  end
+
   def user_details(id)
     User.find(id)
   end
@@ -48,9 +54,16 @@ module UsersHelper
     friendships_path(user_id: user.id)
   end
 
-  def if_plus(user)
-    return false if user.stories.count.zero?
-
-    true
+  def accept_request(user)
+    ActiveRecord::Base.transaction do
+      if current_user.passive_friendships.create!(follower_id: user.id)
+        @user.sent_requests.find_by(reciever_id: current_user.id).destroy
+        redirect_to user_path(user.id) , notice: "Request Accepted."
+      else
+        redirect_to user_path(user.id), notice: "Something went wrong."
+      end
+    end
+  rescue ActiveRecord::RecordInvalid
+    redirect_to user_path(user.id), notice: 'Request was not accepted successfully.'
   end
 end
