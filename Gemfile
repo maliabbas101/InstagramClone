@@ -19,6 +19,8 @@ gem 'cloudinary'
 gem 'jquery-rails'
 gem 'sidekiq'
 gem 'pundit'
+gem 'rack-cors'
+
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

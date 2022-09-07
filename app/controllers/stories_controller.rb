@@ -4,10 +4,15 @@ class StoriesController < ApplicationController
   before_action :set_story, only: %i[show destroy]
   before_action :set_user, only: %i[create]
   before_action :check_user, only: %i[new]
+  before_action :set_user_with, only: %i[index]
 
   def index
-    @stories = Story.all.specific_user(params[:user_id])
-    authorize @stories
+    @stories = Story.all
+    # authorize @stories
+    @json_stories = @stories.map { |e| e.as_json.merge(images: e.images.map { |image| url_for(image) }) }
+    @json_followers = @user.followers.map{ |e| e.as_json}
+    # render json: @json_stories
+    render json: {all_data: {json_stories:@json_stories, json_followers: @json_followers}}
   end
 
   def show; end
